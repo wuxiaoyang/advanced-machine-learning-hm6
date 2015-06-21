@@ -2,7 +2,11 @@ import numpy as np
 import cPickle as pickle
 
 import SGD_lasso
+import ISTA_lasso
+import CD_lasso
 import matplotlib.pyplot as plt
+
+from sklearn import linear_model
 
 N, P = 50, 10
 
@@ -20,14 +24,15 @@ def data_gen():
     n2 = np.linalg.norm( T , ord=2)
     m = np.random.normal(0 , 0.01* (n2**2) /N , size = (N,1))
 
-    y = T+m
+    y = T + m
     return y , X , w
 
 def main():
 
-    y, X , w = data_gen()
+    y, X, w = data_gen()
 
-    print w-SGD_lasso.solve(X,y)
+    print w, SGD_lasso.solve(X,y)
+    #print w, ISTA_lasso.solve(X,y)
 
 if __name__ == '__main__':
     main()
